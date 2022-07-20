@@ -15,7 +15,7 @@ const Splashpage = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            localStorage.getItem('token') ? navigate('/login') : navigate('/login')
+            localStorage.getItem('token') ? navigate('/dashboard') : navigate('/dashboard')
         }, 2000);
 
     }, [])

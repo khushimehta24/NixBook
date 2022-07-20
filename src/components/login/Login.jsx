@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import TextField from '../TextField/TextField'
 import React from 'react'
 import { useNavigate } from 'react-router'
@@ -7,6 +7,7 @@ import { btn, btn2, gridContainer, griditem, ptypo, textField, typo, loginBtn } 
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import { AuthService } from '../../services/authservices'
+import axiosHandler from '../../helpers/axiosHandler'
 
 const INITIAL_FORM_STATE = {
     username: "",
@@ -27,10 +28,12 @@ function Login() {
     const handleSubmit = async (values) => {
         await AuthService.Login(values.username, values.password)
             .then((res) => {
+                localStorage.setItem("user", JSON.stringify(res.data));
+                navigate('/homepage')
                 console.log(res.data);
             })
             .catch((err) => {
-                console.log(err);
+                axiosHandler(err.response.data.message)
             })
     }
 

@@ -1,11 +1,10 @@
-import { Button, Card, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
 import TextField from '../TextField/TextField';
 import { Box } from '@mui/system'
 import { Formik, Form } from "formik";
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router'
-import { btn, btn2, gridContainer, griditem, ptypo, textField, typo, loginBtn, textFields, ptypos } from '../login/LoginCss'
+import { btn, btn2, gridContainer, griditem, typo, loginBtn, textFields, ptypos } from '../login/LoginCss'
 import ElevateAppBar from '../navbar/Navbar'
 import * as Yup from "yup";
 import { AuthService } from '../../services/authservices';
@@ -37,7 +36,7 @@ function Login() {
     const handleSubmit = async (values) => {
         await AuthService.SignUp(values.username, values.email, values.password)
             .then((res) => {
-                console.log(res.data);
+                navigate('/login')
             })
             .catch((err) => {
                 let error = err.request.response.split(":")[6].split("{ ")[1]
@@ -63,7 +62,7 @@ function Login() {
                                 onSubmit={(values) => handleSubmit(values)}>
                                 <Form>
 
-                                    <Typography variant='h5' sx={typo}>Welcome, Back!</Typography>
+                                    <Typography variant='h5' sx={typo}>Create Account</Typography>
 
                                     <Box sx={{ display: 'flex', flexDirection: { md: 'row', sm: 'row', xs: 'column' } }}>
 
